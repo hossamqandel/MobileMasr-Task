@@ -1,14 +1,13 @@
 # MOBILE MASR
+- MOBILE MASR is an online store specialized in sports cloths of many famous companies, with a modern UI 🤩🔥
 
-## 🤳🏾Demo
+## 🤳🏾 Demo
+![Demo Video](https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/5d9878ba-1d8a-44de-b5ec-4cb0f8dee6ca)
 
-![Demo Video](video_link_here)
+## 🧐 Want to try it?
+You can download the demo from [here](https://easyupload.io/xxsv1y).
 
-## 🧐Want to try it?
-You can download the demo from [here](demo_link_here).
-
-## 📸Screenshots
-
+## 📸 Screenshots
 <div align="center">
   <img src="https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/54a7eb82-372f-433f-bccc-98c4918d5759" alt="Screenshot 1" width="300"/>
   <img src="https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/8c01bad9-68ef-4f6d-9888-7b245fad9f0a" alt="Screenshot 1" width="300"/>
@@ -19,7 +18,6 @@ You can download the demo from [here](demo_link_here).
 </div>
 
 ## 🚀 Tech used
-
 - Retrofit: Simplifies network requests by allowing you to define API endpoints as interface methods, converting responses into objects.
 
 - Kotlin Coroutines: implify asynchronous programming by providing a sequential way to write asynchronous code without blocking the main thread.
@@ -28,17 +26,23 @@ You can download the demo from [here](demo_link_here).
 
 - SwipeToRefresh: a UI pattern for adding pull-to-refresh functionality to RecyclerViews or scrollable views, allowing users to update content with a swipe gesture.
 
-Navigation Component: Simplifies implementing navigation in Android apps by providing tools to design and manage navigation paths between screens.
+- Navigation Component: Simplifies implementing navigation in Android apps by providing tools to design and manage navigation paths between screens.
 
-- Room Database: A SQLite object mapping library for Android that provides an abstraction layer over SQLite databases, simplifying database operations with compile-time verification of queries.
+- Room Database: for storing complex data locally
 
 - ViewModel: An Android Architecture Component that manages UI-related data in a lifecycle-aware manner, surviving configuration changes and decoupling UI logic from UI controllers.
 
-## Architecture
+- Dagger-Hilt: Simplifies dependency injection, reducing boilerplate code.
+
+- DataStore: for shared preferences like app's launch state and language, etc.
+
+- LottieFiles: for loading animations
+
+## 🏗️ Architecture
 <div align="center">
   <img src="https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/4e39cf5d-e83d-4ce2-8c40-1f2921b08b2f" alt="Screenshot 1" width="450"/>
 </div>
 
-## Do you Want more?
+## 🛎️ Do you Want more?
 
-Feel free to connect or [contact us](contact_link_here).
+Feel free to connect or [LinkedIn](https://www.linkedin.com/in/hossamqandeel/).
