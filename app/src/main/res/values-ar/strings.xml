@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">موبايل مصر</string>
+
+    <string name="mobile_masr">
+        <font color="#092b8c">موبايل</font>
+        <font color="#f95203">مصر</font>
+    </string>
+
+    <string name="sign_in">تسجيل دخول</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="error_http_internal_error">حدث خطأ ما من جانبنا. يرجى المحاولة مرة أخرى في وقت لاحقز</string>
+    <string name="error_no_internet">لا يوجد اتصال بالانترنت, يرجى المحاولة مرة أخرى</string>
+    <string name="error_unauthorized">عفوًا، لقد انتهت صلاحية جلستك. الرجاء تسجيل الدخول من جديد.</string>
+
+    <string name="buy">شراء</string>
+    <string name="egp">جنيه</string>
+    <string name="error_bad_request_item_not_available">عذرًا، يبدو أن هذا المنتج غير متوفر بعد الآن</string>
+
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Mobile Masr</string>
+
+    <string name="mobile_masr">
+        <font color="#092b8c">Mobile</font>
+        <font color="#f95203">Masr</font>
+    </string>
+    <string name="sign_in">Sign-In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="error_http_internal_error">Something went wrong on our end. Please try again later.</string>
+    <string name="error_no_internet">No internet connection. Please try again.</string>
+    <string name="error_unauthorized">Oops, Your session is expired. Please login again.</string>
+    <string name="buy">Buy</string>
+    <string name="egp">EGP</string>
+    <string name="error_bad_request_item_not_available">Sorry, It looks like this product is not available anymore.</string>
+
+</resources>
