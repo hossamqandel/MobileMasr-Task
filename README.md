@@ -2,7 +2,7 @@
 - MOBILE MASR is an online store specialized in sports cloths of many famous companies, with a modern UI 🤩🔥
 
 ## 🤳🏾 Demo
-![Demo Video](https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/5d9878ba-1d8a-44de-b5ec-4cb0f8dee6ca)
+[](https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/178d6038-4912-44cc-8263-dc8c00613e74)
 
 ## 🧐 Want to try it?
 You can download the demo from [here](https://easyupload.io/xxsv1y).
