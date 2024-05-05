@@ -1,7 +1,5 @@
 # MOBILE MASR
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
 ## 🤳🏾Demo
 
 ![Demo Video](video_link_here)
@@ -20,15 +18,26 @@ You can download the demo from [here](demo_link_here).
   <img src="https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/26965be0-a00b-4aed-b96e-f96450a4d189" alt="Screenshot 2" width="300"/>
 </div>
 
-## 🧑🏾‍💻Tech used
+## 🚀 Tech used
 
-- Technology 1
-- Technology 2
-- Technology 3
+- Retrofit: Simplifies network requests by allowing you to define API endpoints as interface methods, converting responses into objects.
+
+- Kotlin Coroutines: implify asynchronous programming by providing a sequential way to write asynchronous code without blocking the main thread.
+
+- Glide: Glide is an image loading library for Android that efficiently loads and displays images from various sources with caching support.
+
+- SwipeToRefresh: a UI pattern for adding pull-to-refresh functionality to RecyclerViews or scrollable views, allowing users to update content with a swipe gesture.
+
+Navigation Component: Simplifies implementing navigation in Android apps by providing tools to design and manage navigation paths between screens.
+
+- Room Database: A SQLite object mapping library for Android that provides an abstraction layer over SQLite databases, simplifying database operations with compile-time verification of queries.
+
+- ViewModel: An Android Architecture Component that manages UI-related data in a lifecycle-aware manner, surviving configuration changes and decoupling UI logic from UI controllers.
 
 ## Architecture
-
-Explain the architecture of your app here.
+<div align="center">
+  <img src="https://github.com/hossamqandel/MobileMasr-Task/assets/63760755/4e39cf5d-e83d-4ce2-8c40-1f2921b08b2f" alt="Screenshot 1" width="450"/>
+</div>
 
 ## Do you Want more?
 
