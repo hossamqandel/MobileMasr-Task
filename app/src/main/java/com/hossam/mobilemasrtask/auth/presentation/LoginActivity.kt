@@ -1,22 +1,26 @@
 package com.hossam.mobilemasrtask.auth.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import com.hossam.mobilemasrtask.R
+import androidx.lifecycle.repeatOnLifecycle
 import com.hossam.mobilemasrtask.auth.presentation.utl.LoginState
 import com.hossam.mobilemasrtask.databinding.ActivityLoginBinding
 import com.hossam.mobilemasrtask.product.presentation.ProductActivity
+import com.hossam.mobilemasrtask.util.extension.onClick
 import com.hossam.mobilemasrtask.util.extension.setSystemBarsPadding
+import com.hossam.mobilemasrtask.util.extension.showSnackbar
+import com.hossam.mobilemasrtask.util.extension.showToast
 import com.hossam.mobilemasrtask.util.extension.startActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -32,15 +36,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSystemBarsPadding()
 
-        onLoginEvent()
+        submitLoginEvent()
+        observeValidation()
+        observeState()
     }
 
-    private fun onLoginEvent(){
-        binding.btnLogin.setOnClickListener {
-            lifecycleScope.launch {
-                startAuthentication()
-                observeLoginState()
-            }
+    private fun submitLoginEvent(){
+        binding.btnLogin.onClick {
+            startAuthentication()
         }
 
     }
@@ -49,11 +52,22 @@ class LoginActivity : AppCompatActivity() {
         with(binding){
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
-            viewModel.getAuthState(email = email, password = password)
+            viewModel.submit(email, password)
+        }
+    }
+
+    private fun observeValidation(){
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED){
+                combine(viewModel.emailValidation, viewModel.passwordValidation) { email, password ->
+                    binding.etEmail.error = email?.let { getString(email) }
+                    binding.etPassword.error = password?.let { getString(password) }
+                }.collect()
+            }
         }
     }
     
-    private suspend fun observeLoginState(){
+    private fun observeState(){
         lifecycleScope.launch { 
             viewModel.state.collectLatest { state -> 
                 when(state){
@@ -63,13 +77,7 @@ class LoginActivity : AppCompatActivity() {
                             finish()
                         }
                     }
-                    is LoginState.Error -> {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            getString(state.message),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    is LoginState.Error -> { binding.root.showSnackbar(state.message) }
                 }
             }
         }

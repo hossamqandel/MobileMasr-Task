@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -28,8 +29,12 @@ fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     requireContext().showToast(message)
 }
 
-fun Fragment.showSnackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
-    Snackbar.make(requireView(), message, duration).show()
+fun View.showSnackbar(message: Int, duration: Int = Snackbar.LENGTH_SHORT) {
+    Snackbar.make(this, this.context.getString(message), duration).show()
+}
+
+fun View.showSnackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
+    Snackbar.make(this, message, duration).show()
 }
 
 fun Fragment.showSnackbar(@StringRes message: Int, duration: Int = Snackbar.LENGTH_SHORT) {

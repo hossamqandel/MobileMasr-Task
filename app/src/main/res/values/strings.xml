@@ -16,4 +16,15 @@
     <string name="egp">EGP</string>
     <string name="error_bad_request_item_not_available">Sorry, It looks like this product is not available anymore.</string>
 
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="password_should_be_at_least_8_characters">Password should be at least 8 characters</string>
+
+
+    <string name="the_user_name_or_password_is_incorrect">The user name or password is incorrect</string>
+
+    <string name="error_unexpected">Something went wrong on our end. Please try again later.</string>
+
+
 </resources>
