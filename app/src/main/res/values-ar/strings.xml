@@ -19,4 +19,13 @@
     <string name="egp">جنيه</string>
     <string name="error_bad_request_item_not_available">عذرًا، يبدو أن هذا المنتج غير متوفر بعد الآن</string>
 
+    <string name="email_cannot_be_empty">لا يمكن ان يكون الايميل فارغاً</string>
+    <string name="invalid_email">من فضلك ادخل البريد الالكتروني بشكل صحيح</string>
+
+    <string name="password_cannot_be_empty">لا يمكن ان يكون كلمة المرور فارغة</string>
+    <string name="password_should_be_at_least_8_characters">يجب ان تكون كلمة المرور على الاقل 8 حروف</string>
+    <string name="the_user_name_or_password_is_incorrect">اسم المستخدم او كلمة المرور غير صحيحة</string>
+    <string name="error_unexpected">حدث خطأ ما من جانبنا. يرجى المحاولة مرة أخرى في وقت لاحق.</string>
+
+
 </resources>
