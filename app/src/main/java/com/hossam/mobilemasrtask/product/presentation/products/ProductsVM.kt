@@ -7,7 +7,6 @@ import com.hossam.mobilemasrtask.product.domain.repository.IProductRepository
 import com.hossam.mobilemasrtask.product.presentation.products.util.ProductsState
 import com.hossam.mobilemasrtask.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -15,22 +14,35 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel class responsible for managing and providing data related to products.
+ * @param repo The repository responsible for fetching product data.
+ */
 @HiltViewModel
 class ProductsVM @Inject constructor(
     private val repo: IProductRepository
 ) : ViewModel() {
 
-
     private var getProductsJob: Job? = null
 
-    private val _state = MutableSharedFlow<ProductsState>(replay = 2)
+    // SharedFlow to emit the state of products data to observing components.
+    private val _state = MutableSharedFlow<ProductsState>(replay = 1)
     val state = _state.asSharedFlow()
 
+    // Offset and limit for pagination.
     private var offset = 0
     private var limit = 10
 
-    fun getProducts() {
-        getProductsJob?.cancel()
+    init {
+        // Fetch products when ViewModel is initialized.
+        getProducts()
+    }
+
+    /**
+     * Fetches products from the repository.
+     */
+    private fun getProducts() {
+        getProductsJob?.cancel() // Cancels previous job to avoid overlapping requests.
         getProductsJob = viewModelScope.launch {
             repo.getProductsPaginated(offset, limit).collectLatest { result ->
                 when (result) {
@@ -40,6 +52,7 @@ class ProductsVM @Inject constructor(
                         if (result.data.isNullOrEmpty()) {
                             submitState(ProductsState.NoProducts)
                         } else {
+                            // Maps product DTOs to domain model and emits success state.
                             val asProductsSet = result.data.map { it.toProduct() }.toSet()
                             submitState(ProductsState.Success(asProductsSet))
                         }
@@ -56,18 +69,34 @@ class ProductsVM @Inject constructor(
         }
     }
 
+    /**
+     * Refreshes products by re-fetching from the repository.
+     */
+    fun refreshProducts() {
+        getProducts()
+    }
+
+    /**
+     * Emits a state to the shared flow.
+     * @param state The state to emit.
+     */
     private suspend fun submitState(state: ProductsState) {
         _state.emit(state)
     }
 
-    fun upgradePage(){
+    /**
+     * Increases the offset for pagination.
+     */
+    fun upgradePage() {
         offset += limit
     }
 
+    /**
+     * Cancels the job when ViewModel is cleared.
+     */
     override fun onCleared() {
         getProductsJob?.cancel()
         super.onCleared()
     }
-
 
 }

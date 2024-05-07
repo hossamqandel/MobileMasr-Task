@@ -11,15 +11,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.hossam.mobilemasrtask.R
 import com.hossam.mobilemasrtask.databinding.FragmentProductsBinding
 import com.hossam.mobilemasrtask.product.domain.model.Product
 import com.hossam.mobilemasrtask.product.presentation.products.util.ProductsState
 import com.hossam.mobilemasrtask.util.extension.addDivider
 import com.hossam.mobilemasrtask.util.extension.hide
+import com.hossam.mobilemasrtask.util.extension.onLazyPagination
+import com.hossam.mobilemasrtask.util.extension.setProgressColor
 import com.hossam.mobilemasrtask.util.extension.setVisibleOrGone
 import com.hossam.mobilemasrtask.util.extension.show
-import com.hossam.mobilemasrtask.util.extension.showToast
+import com.hossam.mobilemasrtask.util.extension.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -32,14 +34,18 @@ class ProductsFragment : Fragment() {
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ProductsVM by viewModels()
-    @Inject lateinit var productAdapter: ProductAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+
+    @Inject
+    lateinit var productAdapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onBackPressed()
     }
 
+    /**
+     * Handles back button press event. When back button is pressed, it finishes the associated activity.
+     */
     private fun onBackPressed() {
         activity?.onBackPressedDispatcher?.addCallback(object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -64,6 +70,7 @@ class ProductsFragment : Fragment() {
         swipeToRefresh()
         observeProductsState()
         onProductClickEvent()
+        setupRecyclerPagination()
     }
 
 
@@ -72,26 +79,34 @@ class ProductsFragment : Fragment() {
         _binding = null
     }
 
+    /**
+     * Sets up swipe-to-refresh functionality for the RecyclerView.
+     */
     private fun swipeToRefresh() {
+        binding.swipeRefresh.setProgressColor(R.color.main_color_orange)
         binding.swipeRefresh.setOnRefreshListener {
             binding.swipeRefresh.isRefreshing = false
-            viewModel.getProducts()
+            viewModel.refreshProducts()
         }
     }
 
 
+    /**
+     * Binds the RecyclerView with its adapter and other configurations.
+     */
     private fun bindRecycler() {
         with(binding) {
-            layoutManager = LinearLayoutManager(requireContext()).apply { orientation = LinearLayoutManager.VERTICAL }
             rvProducts.show()
-            rvProducts.layoutManager = layoutManager
             rvProducts.addDivider()
             rvProducts.adapter = productAdapter
         }
     }
 
+    /**
+     * Observes the state of products data and updates UI accordingly.
+     */
     private fun observeProductsState() {
-        viewModel.getProducts()
+        // Observes products state and updates UI based on different states.
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.state.collectLatest { state ->
@@ -109,9 +124,10 @@ class ProductsFragment : Fragment() {
                         is ProductsState.NoProducts -> {
                             binding.rvProducts.hide()
                             binding.ivNoData.show()
+                            showSnackbar(R.string.it_seems_there_are_no_content_available)
                         }
 
-                        is ProductsState.Error -> showToast(getString(state.message))
+                        is ProductsState.Error -> showSnackbar(state.message)
 
                     }
                 }
@@ -119,33 +135,32 @@ class ProductsFragment : Fragment() {
         }
     }
 
+    /**
+     * Sets the visibility state of the progress bar.
+     * @param isLoading Indicates whether the progress bar should be visible or not.
+     */
     private fun setProgressBarState(isLoading: Boolean) {
         binding.progressBar.setVisibleOrGone(isLoading)
     }
 
     private fun onProductClickEvent() {
         productAdapter.setOnProductClickEvent { product: Product ->
+            // Navigates to the product detail fragment when a product item is clicked.
             val action = ProductsFragmentDirections.actionProductsFragmentToProductDetailFragment3(product.id)
             findNavController().navigate(action)
         }
     }
 
-//    private fun setupRecyclerPagination() {
-//        with(binding) {
-//            rvProducts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                    val visibleItemCount = layoutManager.childCount
-//                    val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
-//                    val total = productAdapter.itemCount
-//
-//                    if ((visibleItemCount + pastVisibleItem) >= total) {
-//                        viewModel.upgradePage()
-//                        viewModel.getProducts()
-//                    }
-//                    super.onScrolled(recyclerView, dx, dy)
-//                }
-//            })
-//        }
-//    }
+    /**
+     * Sets up lazy pagination for the RecyclerView.
+     */
+    private fun setupRecyclerPagination() {
+        with(binding) {
+            rvProducts.onLazyPagination {
+                viewModel.upgradePage()
+                viewModel.refreshProducts()
+            }
+        }
+    }
 
 }
