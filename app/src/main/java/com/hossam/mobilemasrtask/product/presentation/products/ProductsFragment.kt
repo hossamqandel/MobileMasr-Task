@@ -15,13 +15,16 @@ import com.hossam.mobilemasrtask.R
 import com.hossam.mobilemasrtask.databinding.FragmentProductsBinding
 import com.hossam.mobilemasrtask.product.domain.model.Product
 import com.hossam.mobilemasrtask.product.presentation.products.util.ProductsState
+import com.hossam.mobilemasrtask.settings.presentation.SettingActivity
 import com.hossam.mobilemasrtask.util.extension.addDivider
 import com.hossam.mobilemasrtask.util.extension.hide
+import com.hossam.mobilemasrtask.util.extension.onClick
 import com.hossam.mobilemasrtask.util.extension.onLazyPagination
 import com.hossam.mobilemasrtask.util.extension.setProgressColor
 import com.hossam.mobilemasrtask.util.extension.setVisibleOrGone
 import com.hossam.mobilemasrtask.util.extension.show
 import com.hossam.mobilemasrtask.util.extension.showSnackbar
+import com.hossam.mobilemasrtask.util.extension.startActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -68,6 +71,7 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         swipeToRefresh()
+        onSettingClickEvent()
         observeProductsState()
         onProductClickEvent()
         setupRecyclerPagination()
@@ -77,6 +81,12 @@ class ProductsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun onSettingClickEvent() {
+        binding.btnSettings.onClick {
+            activity?.startActivity<SettingActivity>()
+        }
     }
 
     /**

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingVertical="12dp"
-    tools:context=".auth.presentation.LoginActivity">
+    tools:context=".auth.presentation.login.LoginActivity">
 
     <TextView
         android:id="@+id/textView"

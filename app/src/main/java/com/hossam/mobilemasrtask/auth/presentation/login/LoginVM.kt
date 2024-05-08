@@ -1,4 +1,4 @@
-package com.hossam.mobilemasrtask.auth.presentation
+package com.hossam.mobilemasrtask.auth.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,7 @@ import com.hossam.mobilemasrtask.auth.data.dto.LoginDTO
 import com.hossam.mobilemasrtask.auth.domain.repository.IAuthRepository
 import com.hossam.mobilemasrtask.auth.domain.use_case.ValidateEmailUseCase
 import com.hossam.mobilemasrtask.auth.domain.use_case.ValidatePasswordUseCase
-import com.hossam.mobilemasrtask.auth.presentation.utl.LoginState
+import com.hossam.mobilemasrtask.auth.presentation.login.utl.LoginState
 import com.hossam.mobilemasrtask.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

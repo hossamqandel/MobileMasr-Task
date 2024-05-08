@@ -27,7 +27,10 @@
     <string name="the_user_name_or_password_is_incorrect">اسم المستخدم او كلمة المرور غير صحيحة</string>
     <string name="error_unexpected">حدث خطأ ما من جانبنا. يرجى المحاولة مرة أخرى في وقت لاحق.</string>
     <string name="it_seems_there_are_no_content_available">يبدو أنه لا يوجد محتوى متوفر.</string>
-
+    <string name="logout">تسجيل خروج</string>
+    <string name="please_try_again">الرجاء المحاولة مرة أخرى</string>
+    <string name="please_wait">الرجاء الانتظار…</string>
+    <string name="settings">الاعدادت</string>
 
 
 </resources>

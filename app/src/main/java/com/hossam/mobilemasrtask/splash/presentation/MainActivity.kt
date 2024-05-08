@@ -6,12 +6,9 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.hossam.mobilemasrtask.R
-import com.hossam.mobilemasrtask.auth.presentation.LoginActivity
+import com.hossam.mobilemasrtask.auth.presentation.login.LoginActivity
 import com.hossam.mobilemasrtask.databinding.ActivityMainBinding
 import com.hossam.mobilemasrtask.product.presentation.ProductActivity
 import com.hossam.mobilemasrtask.splash.presentation.util.AuthState

@@ -1,4 +1,4 @@
-package com.hossam.mobilemasrtask.auth.presentation
+package com.hossam.mobilemasrtask.auth.presentation.login
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -8,16 +8,14 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.hossam.mobilemasrtask.auth.presentation.utl.LoginState
+import com.hossam.mobilemasrtask.auth.presentation.login.utl.LoginState
 import com.hossam.mobilemasrtask.databinding.ActivityLoginBinding
 import com.hossam.mobilemasrtask.product.presentation.ProductActivity
 import com.hossam.mobilemasrtask.util.extension.onClick
 import com.hossam.mobilemasrtask.util.extension.setSystemBarsPadding
 import com.hossam.mobilemasrtask.util.extension.showSnackbar
-import com.hossam.mobilemasrtask.util.extension.showToast
 import com.hossam.mobilemasrtask.util.extension.startActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine

@@ -27,6 +27,10 @@
     <string name="error_unexpected">Something went wrong on our end. Please try again later.</string>
 
     <string name="it_seems_there_are_no_content_available">It seems there are no content available</string>
+    <string name="logout">Logout</string>
+    <string name="please_try_again">Please try again</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="settings">Settings</string>
 
 
 </resources>

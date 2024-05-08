@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class DataStoreUtil(private val context: Context) {
@@ -30,6 +31,13 @@ class DataStoreUtil(private val context: Context) {
         context.dataStore.edit { preferences ->
             preferences[KEY_REFRESH_TOKEN] = refreshToken
         }
+    }
+
+    suspend fun clearAll(): Boolean {
+        saveToken("")
+        saveRefreshToken("")
+        return getTokenAsFlow.first().isNullOrEmpty() &&
+                getRefreshTokenAsFlow.first().isNullOrEmpty()
     }
 
     val getTokenAsFlow: Flow<String?> = context
