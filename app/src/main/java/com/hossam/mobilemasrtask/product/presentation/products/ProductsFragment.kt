@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,10 +38,14 @@ class ProductsFragment : Fragment() {
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ProductsVM by viewModels()
+    private lateinit var popupMenu: PopupMenu
 
     @Inject
     lateinit var productAdapter: ProductAdapter
 
+    companion object {
+        private const val SETTINGS_INDEX = 0
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onBackPressed()
@@ -71,7 +76,7 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         swipeToRefresh()
-        onSettingClickEvent()
+        popupMenuClickEvents()
         observeProductsState()
         onProductClickEvent()
         setupRecyclerPagination()
@@ -83,9 +88,26 @@ class ProductsFragment : Fragment() {
         _binding = null
     }
 
-    private fun onSettingClickEvent() {
-        binding.btnSettings.onClick {
-            activity?.startActivity<SettingActivity>()
+    private fun popupMenuClickEvents() {
+
+
+        popupMenu = PopupMenu(requireContext(), binding.btnPopupMenu).also {
+            it.inflate(R.menu.menu_home)
+        }
+
+        binding.btnPopupMenu.onClick {
+            popupMenu.show()
+        }
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.menuSettings -> {
+                    activity?.startActivity<SettingActivity>()
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 

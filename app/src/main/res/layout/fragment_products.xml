@@ -9,23 +9,61 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="12dp"
+
         android:layout_height="match_parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSettings"
-            android:layout_width="wrap_content"
+        <Toolbar
+            android:id="@+id/appBar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
-            android:layout_marginStart="6dp"
-            app:cornerRadius="8dp"
-            android:fontFamily="@font/righteous_regular"
-            android:textSize="16sp"
-            android:background="@color/main_color_blue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/main_color_orange"
+            style="?android:attr/toolbarStyle"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="8dp"
+                android:orientation="horizontal"
+                >
+
+<!--                <TextView-->
+<!--                    android:id="@+id/btnSettings"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:text="@string/settings"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    />-->
 
 
+                <ImageView
+                    android:id="@+id/btnPopupMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_more_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/yvScreenTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@string/products"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+        </Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducts"
@@ -37,7 +75,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSettings"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
         tools:listitem="@layout/item_product" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
