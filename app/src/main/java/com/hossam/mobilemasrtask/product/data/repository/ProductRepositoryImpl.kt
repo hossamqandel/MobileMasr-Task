@@ -101,7 +101,10 @@ class ProductRepositoryImpl @Inject constructor(
                     emit(Result.Success(productDTO))
                 }
 
-                HTTP_BAD_REQUEST or HTTP_NOT_FOUND ->
+                HTTP_BAD_REQUEST ->
+                    emit(Result.Error(R.string.error_item_not_available))
+
+                HTTP_NOT_FOUND ->
                     emit(Result.Error(R.string.error_item_not_available))
 
                 HTTP_UNAUTHORIZED ->

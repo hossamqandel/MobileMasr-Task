@@ -61,11 +61,12 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/tvErrorMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/righteous_regular"
                     android:gravity="center_horizontal"
-                    android:text="@string/error_item_not_available"
+                    tools:text="@string/error_item_not_available"
                     android:textColor="@color/main_color_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />

@@ -20,7 +20,7 @@ class ProductDetailVM @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private var productId: Int = -1
+    private var productId: Int? = null
 
     init {
         savedStateHandle.get<Int>("productId")?.let { productId ->
@@ -29,13 +29,13 @@ class ProductDetailVM @Inject constructor(
     }
 
 
-    private val _state = MutableSharedFlow<ProductDetailState>(replay = 2)
+    private val _state = MutableSharedFlow<ProductDetailState>(replay = 1)
     val state = _state.asSharedFlow()
 
     fun getProductDetail() {
         viewModelScope.launch {
-            if (productId!= -1){
-                repo.getProductDetail(productId).collectLatest { result ->
+            if (productId != null){
+                repo.getProductDetail(productId!!).collectLatest { result ->
                     when (result) {
                         is Result.Loading -> submitState(ProductDetailState.Loading(true))
 

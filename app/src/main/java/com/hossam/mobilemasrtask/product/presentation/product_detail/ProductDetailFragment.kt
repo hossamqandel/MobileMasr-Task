@@ -126,24 +126,26 @@ class ProductDetailFragment : Fragment() {
 
     private fun observeProductState() {
         viewModel.getProductDetail()
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collectLatest { state ->
-                    when (state) {
+        with(binding){
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.CREATED) {
+                    viewModel.state.collectLatest { state ->
+                        when (state) {
 
-                        is ProductDetailState.Loading -> setProgressBarState(state.isLoading)
+                            is ProductDetailState.Loading -> setProgressBarState(state.isLoading)
 
-                        is ProductDetailState.Success -> {
-                            binding.productNotFoundContainer.hide()
-                            binding.productDetailContainer.show()
-                            bindProductDetail(state.product)
-                            bindProductImages(state.product.images)
-                        }
+                            is ProductDetailState.Success -> {
+                                productNotFoundContainer.hide()
+                                productDetailContainer.show()
+                                bindProductDetail(state.product)
+                                bindProductImages(state.product.images)
+                            }
 
-                        is ProductDetailState.Error -> {
-                            showToast(getString(state.message))
-                            binding.productDetailContainer.hide()
-                            binding.productNotFoundContainer.show()
+                            is ProductDetailState.Error -> {
+                                productDetailContainer.hide()
+                                tvErrorMessage.text = getString(state.message)
+                                productNotFoundContainer.show()
+                            }
                         }
                     }
                 }
