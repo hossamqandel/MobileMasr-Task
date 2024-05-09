@@ -26,8 +26,11 @@ class ProductsVM @Inject constructor(
     private var getProductsJob: Job? = null
 
     // SharedFlow to emit the state of products data to observing components.
-    private val _state = MutableSharedFlow<ProductsState>(replay = 1)
+    private val _state = MutableSharedFlow<ProductsState>(replay = 2)
     val state = _state.asSharedFlow()
+
+    private val _errorState = MutableSharedFlow<Int>()
+    val errorState = _errorState.asSharedFlow()
 
     // Offset and limit for pagination.
     private var offset = 0
@@ -61,7 +64,7 @@ class ProductsVM @Inject constructor(
                     is Result.Error -> {
                         submitState(ProductsState.Loading(false))
                         result.message?.let {
-                            submitState(ProductsState.Error(result.message))
+                            _errorState.emit(result.message)
                         }
                     }
                 }

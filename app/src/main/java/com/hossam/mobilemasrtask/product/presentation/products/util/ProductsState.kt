@@ -7,6 +7,5 @@ sealed interface ProductsState {
     data class Loading (val isLoading: Boolean) : ProductsState
     data class Success(val products: Set<Product>) : ProductsState
     data object NoProducts : ProductsState
-    data class Error(val message: Int) : ProductsState
 
 }

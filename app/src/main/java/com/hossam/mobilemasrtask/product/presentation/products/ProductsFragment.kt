@@ -43,9 +43,6 @@ class ProductsFragment : Fragment() {
     @Inject
     lateinit var productAdapter: ProductAdapter
 
-    companion object {
-        private const val SETTINGS_INDEX = 0
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onBackPressed()
@@ -78,6 +75,7 @@ class ProductsFragment : Fragment() {
         swipeToRefresh()
         popupMenuClickEvents()
         observeProductsState()
+        observeErrorsState()
         onProductClickEvent()
         setupRecyclerPagination()
     }
@@ -159,9 +157,18 @@ class ProductsFragment : Fragment() {
                             showSnackbar(R.string.it_seems_there_are_no_content_available)
                         }
 
-                        is ProductsState.Error -> showSnackbar(state.message)
-
                     }
+                }
+            }
+        }
+    }
+
+    private fun observeErrorsState() {
+        // Observes errors events
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.errorState.collectLatest { errorMessage ->
+                    showSnackbar(errorMessage)
                 }
             }
         }
